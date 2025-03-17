@@ -9,7 +9,7 @@ model = IrisMachineLearning()
 
 @app.get("/")
 async def root():
-    return {"message" : "Hello, this is iris classfier 2025/03/10" }
+    return {"message" : "Hello, this is iris classifier 2025/03/10" }
 
 @app.get("/predict")
 async def predict():
@@ -18,7 +18,8 @@ async def predict():
 
 @app.post("/predict")
 async def predict_species(iris:IrisSpecies):
-    prob = model.predict_species(iris.sepal_length, iris.sepal_width, iris.petal_length, iris.petal_width)
-    return pred
+    pred = model.predict_species(iris.sepal_length, iris.sepal_width, iris.petal_length, iris.petal_width)
+    return {"prediction": pred}
+
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.0.1', port=8000)
