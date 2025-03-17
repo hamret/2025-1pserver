@@ -33,7 +33,7 @@ class IrisMachineLearning:
         model = rfc.fit(x,y)
         return model
 
-
+##
     def predict_species(self, sepal_length, sepal_width, petal_length, petal_width):
         x_new = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
         prediction = self.model_rfc.predict(x_new)
