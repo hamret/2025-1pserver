@@ -1,3 +1,24 @@
+function drawChart(prob, pid) {
+
+        var data = google.visualization.arrayToDataTable([
+          ['iris species', 'prob'],
+          ['setosa',     prob[0][0]],
+          ['versicolor',      prob[0][1]],
+          ['virginica',  prob[0][2]]
+
+
+        ]);
+
+        var options = {
+          title: '붓꽃 품종 확률',
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('dountchart'));
+
+        chart.draw(data, options);
+      }
+
 function Send(){
     sl = document.getElementById("sl")
     sw = document.getElementById("sw")
@@ -22,6 +43,8 @@ function Send(){
     }).done(function(response){
         console.log(response)
         txtOut.value = response.prediction + " 일 확률 " + response.probability
+        google.charts.setOnLoadCallback(drawChart(response.probability, document.getElementById('dountchart')));
+
     }).fail(function(response){
         alert("fail" +response)
     }
